@@ -1,4 +1,4 @@
-#code for pdf qna
+#main file
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -82,49 +82,36 @@ def user_input(user_question):
     , return_only_outputs=True)
 
     print(response)
-    # st.write("Reply: ", response["output_text"])
+    st.write("Reply: ", response["output_text"])
+
+
+def con_for_ques(usr):
+        embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
     
-    return response["output_text"]
+        new_db = FAISS.load_local(r"D:\Github\Edu-AiX\faiss_index", embeddings)
+        docs = new_db.similarity_search(usr)
 
+        chain = get_conversational_chain()
 
-def poop(context):
-    poompt = '''
-Can you give me 10 quiz questions based on {}, i want it in specific json file format, like -   
-[
-    {{
-        "question": "(Question)",
-        "options": (["A.option1", "B.option2", "C.option3", "D.option4"]),
-        "answer": "whole correct option"
-    }},
-    {{
-        "question": "What is 2 + 2?",
-        "options": ["A.3", "B.4", "C.5", "D.6"],
-        "answer": "whole correct option"
-    }},
-    {{
-        "question": "What is the largest planet in our solar system?",
-        "options": ["A.Earth", "B.Venus", "C.Jupiter", "D.Mars"],
-        "answer": "whole correct option"
-    }}
-]
-Also each option should have alphabetical labeling as done in example.
-'''.format(context)
-    return poompt
+        
+        # response = chain(
+        #     {"input_documents":docs, "question": user_question}
+        #     , return_only_outputs=True)
+        
+        response = chain.invoke(
+        {"input_documents": docs, "question": usr}
+        , return_only_outputs=True)
+        
+        return response["output_text"]
 
-from AI.Que_gen import que_gen
-
-    
 def main():
     st.set_page_config("Chat PDF")
-    st.header("Welcome to the challenge!!")
+    st.header("Get all your doubts cleared..🧐")
 
-    context = st.text_input("On what topic you want quiz?")
+    user_question = st.text_input("Ask a Question from the PDF Files")
 
-    if context:
-        # context = st.text_input("Enter Quiz Topic", "")
-        prmt=poop(context)
-        r_ques=user_input(prmt)
-        que_gen(r_ques)
+    if user_question:
+        user_input(user_question)
 
     with st.sidebar:
         st.title("Menu:")
@@ -135,10 +122,7 @@ def main():
                 text_chunks = get_text_chunks(raw_text)
                 get_vector_store(text_chunks)
                 st.success("Done")
-            
-    if st.button("Prepare Quiz"):
-        # st.write('okay')  # Redirect to the quiz logic page
-        st.page_link("pages/quiz_logic.py", label="Ready for the challenge ?", icon="📝")
+
 
 
 if __name__ == "__main__":
