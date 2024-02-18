@@ -5,6 +5,7 @@ Learnify-Assistant is an innovative educational tool leveraging cutting-edge AI 
 ## Features
 
 1. **Lecture Q&A**
+   
 Description: Students can receive real-time answers to their queries or doubts while watching a lecture.
 
 Functionality: The tool extracts audio from the video, converts it to text, and uses the extracted text as context to generate relevant answers to student queries.
@@ -12,6 +13,7 @@ Functionality: The tool extracts audio from the video, converts it to text, and 
 Benefits: Enables students to clarify doubts instantly, enhancing understanding and engagement during lectures.
 
 3. **PDF Q&A**
+
 Description: Users can upload multiple PDFs, such as notes or textbooks, and ask questions or doubts related to the content.
 
 Functionality: The tool trains a Language Model on the uploaded PDFs, allowing students to ask questions based on the trained model.
@@ -19,6 +21,7 @@ Functionality: The tool trains a Language Model on the uploaded PDFs, allowing s
 Benefits: Provides a convenient way for students to seek clarification on course materials outside of traditional classroom settings.
 
 4. **Quiz**
+
 Description: Users can upload multiple PDFs and generate quizzes based on specific topics chosen by them.
 
 Functionality: The tool tracks the time spent on each question during the quiz session. This feature allows students to manage their time effectively and helps educators identify areas where students may need additional support.
