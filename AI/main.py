@@ -1,3 +1,4 @@
+#main file
 from pprint import pprint
 import requests
 from pytube import YouTube
@@ -115,7 +116,7 @@ def AiText(url):
 
     return ans
 
-
+#for testing
 # yt_url = 'https://www.youtube.com/watch?v=RP2gIgRL6Yw'
 
 # X=AiText(yt_url)

@@ -1,3 +1,4 @@
+#main file
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -84,7 +85,24 @@ def user_input(user_question):
     st.write("Reply: ", response["output_text"])
 
 
+def con_for_ques(usr):
+        embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
+    
+        new_db = FAISS.load_local(r"D:\Github\Edu-AiX\faiss_index", embeddings)
+        docs = new_db.similarity_search(usr)
 
+        chain = get_conversational_chain()
+
+        
+        # response = chain(
+        #     {"input_documents":docs, "question": user_question}
+        #     , return_only_outputs=True)
+        
+        response = chain.invoke(
+        {"input_documents": docs, "question": usr}
+        , return_only_outputs=True)
+        
+        return response["output_text"]
 
 def main():
     st.set_page_config("Chat PDF")
