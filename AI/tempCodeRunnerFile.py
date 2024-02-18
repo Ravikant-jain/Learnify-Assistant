@@ -135,42 +135,9 @@ def ans(promt):
     return answer.text
 
 #for testing
-# yt_url = 'https://www.youtube.com/watch?v=RP2gIgRL6Yw'
-
-# X=AiText(yt_url)
-# prmt=poopmt('What is the moral of the story',X)
-# a1=ans(prmt)
-# print(a1)
-
-
-
-#UI starts from here 
-
-
-st.set_page_config(layout='wide')
-
-# Hardcoded YouTube video URL which could be changed
 yt_url = 'https://www.youtube.com/watch?v=RP2gIgRL6Yw'
 
-
 X=AiText(yt_url)
-
-st.title("Lecture QnA ")
-
-# Create two columns with the specified ratio
-col1, col2 = st.columns([0.7, 0.3])
-
-# Left column: YouTube video player
-with col1:
-    st.video(yt_url)
-
-# Right column: Summarize button and bigger text box
-with col2:
-
-    input=st.text_input("Input your question ",key="input")
-    submit=st.button("Ask the question")
-
-    if submit and input:
-        prmt=poopmt(input,X)
-        a1=ans(prmt)
-        st.write(a1)
+prmt=poopmt('What is the moral of the story',X)
+a1=ans(prmt)
+print(a1)

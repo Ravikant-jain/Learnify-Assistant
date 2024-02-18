@@ -1,24 +1,3 @@
-# import streamlit as st
-# # Importing the main function from Quiz_logic.py
-
-
-# def main():
-#     st.title("Quiz Topic Selection")
-#     st.write("Please enter a topic for the quiz.")
-
-#     # Text input for quiz topic
-#     user_input = st.text_input("Enter Quiz Topic", "")
-
-#     # Button to start the quiz
-#     if st.button("Start Quiz"):
-        
-#         # st.switch_page("pages/quiz_logic.py")  # Redirect to the quiz logic page
-#         st.page_link("pages/quiz_logic.py", label="Click here to visit quiz page")
-# if __name__ == "__main__":
-#     main()
-
-
-#main file
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -132,23 +111,6 @@ Can you give me 10 quiz questions based on {}, i want it in specific json file f
 
 from AI.Que_gen import que_gen
 
-# def main():
-#     st.title("Quiz Topic Selection")
-#     st.write("Please enter a topic for the quiz.")
-
-#     # Text input for quiz topic
-#     context = st.text_input("Enter Quiz Topic", "")
-#     prmt=poop(context)
-#     r_ques=user_input(prmt)
-#     que_gen(r_ques)
-    
-    
-    
-#     # Button to start the quiz
-    # if st.button("Start Quiz"):
-    #     st.write('okay')  # Redirect to the quiz logic page
-    #     st.page_link("quiz_logic.py", label="Home", icon="🏠")
-    
     
 def main():
     st.set_page_config("Chat PDF")

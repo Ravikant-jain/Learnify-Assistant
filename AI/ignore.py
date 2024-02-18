@@ -5,15 +5,13 @@ from pytube import YouTube
 import os
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import streamlit as st
-import json
 
 
 from dotenv import load_dotenv
-import os
+
+
 load_dotenv()
-import google.generativeai as genai
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-model = genai.GenerativeModel('gemini-pro')
+os.getenv("BART_API_KEY")
 
 
 
@@ -81,39 +79,33 @@ def API():
             data = f.read()
         response = requests.post(API_URL, headers=headers, data=data)
         return response.json()
-    
     print('done till here')
-    if not os.path.exists(r'Cache/trpt.json'):
-        output = query(r"D:\Github\Edu-AiX\Cache\extracted-audio.mp3")
+    output = query(r"D:\Github\Edu-AiX\Cache\extracted-audio.mp3")
+    try:
         story=output['text']
-        file_path = r"Cache\trpt.json"
-        with open(file_path, "w") as json_file:
-            json.dump(story, json_file)
-    else:
+    except:
         print('By-passing due to API issue')
-        with open(r'D:\Github\Edu-AiX\Cache\trpt.json', 'r') as file:
+        with open(r'D:\Github\Edu-AiX\TextAi.json', 'r') as file:
             quiz_data = json.load(file)
-        story=quiz_data
+        story=quiz_data['Story']
+    #summerise Ai
+
+    API_URL2 = "https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-12-6"
+    headers2 = {"Authorization": os.getenv("BART_API_KEY")}
+
+    def query2(payload):
+        response = requests.post(API_URL2, headers=headers2, json=payload)
+        return response.json()
     
-    return story
-# import os
-# import json
-# import requests
-# print(API())
-
-
-
-def poopmt(que,trpt):
-    poompt = '''
-    I was studying from a youtube video, and I have a question, i am giving you transcript as context , feel free to use your knowledge to answer my question.
-    Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-    provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
-    Context:{}
-    Question: {}
-
-'''.format(trpt,que)
-    return poompt
-
+    output2 = query2({"inputs": story})
+    xo=output2[0]
+    summery=xo['summary_text']
+    
+    res['Story']=story
+    res['Summery']=summery
+    
+    print("transcribe done")
+    return res
 
 
 @st.cache_data
@@ -130,17 +122,19 @@ def AiText(url):
     return ans
 
 
-def ans(promt):
-    answer = model.generate_content(promt)
-    return answer.text
 
 #for testing
 # yt_url = 'https://www.youtube.com/watch?v=RP2gIgRL6Yw'
 
 # X=AiText(yt_url)
-# prmt=poopmt('What is the moral of the story',X)
-# a1=ans(prmt)
-# print(a1)
+
+
+
+
+
+
+
+
 
 
 
@@ -155,7 +149,12 @@ yt_url = 'https://www.youtube.com/watch?v=RP2gIgRL6Yw'
 
 X=AiText(yt_url)
 
-st.title("Lecture QnA ")
+import json
+file_path = r"Jsons\TextAi.json"
+with open(file_path, "w") as json_file:
+    json.dump(X, json_file)
+
+st.title("Lecture")
 
 # Create two columns with the specified ratio
 col1, col2 = st.columns([0.7, 0.3])
@@ -167,10 +166,9 @@ with col1:
 # Right column: Summarize button and bigger text box
 with col2:
 
-    input=st.text_input("Input your question ",key="input")
-    submit=st.button("Ask the question")
+    st.text_area("Video Transcription:",X['Story'], height=400)
 
-    if submit and input:
-        prmt=poopmt(input,X)
-        a1=ans(prmt)
-        st.write(a1)
+    if st.button("Summarize"):
+        
+        
+        st.text_area("Video Summary:",X['Summery'], height=400)
