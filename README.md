@@ -13,9 +13,13 @@ Learnify-Assistant is an innovative educational tool leveraging cutting-edge AI 
 ## Benefits
 
 Boost understanding: Clarify doubts instantly during lectures and study sessions.
+
 Improve knowledge retention: Ask open-ended questions and explore concepts in depth.
+
 Develop critical thinking: Analyze reports and visualize data to gain deeper insights.
+
 Increase learning efficiency: Spend less time searching for answers and more time learning.
+
 Personalize your learning: Tailor quizzes to your specific needs and study goals
 
 ## How to Use
