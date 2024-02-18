@@ -27,21 +27,11 @@ Can you give me 10 quiz questions based on {context}, i want it in specific json
 [
     {
         "question": "(Question)",
-        "options": (["option1", "option2", "option3", "option4"]),
-        "answer": "(answer here)"
-    },
-    {
-        "question": "What is 2 + 2?",
-        "options": ["3", "4", "5", "6"],
-        "answer": "B"
-    },
-    {
-        "question": "What is the largest planet in our solar system?",
-        "options": ["Earth", "Venus", "Jupiter", "Mars"],
-        "answer": "C"
+        "options": (["A.option1", "B.option2", "C.option3", "D.option4"]),
+        "answer": "correct option"
     }
 ]
-
+Also each option should have alphabetical labeling as done in example.
 '''
     return poompt
 
@@ -94,5 +84,4 @@ def save_q(answers):
 def que_gen(q_set):
     questions_dict=extract_questions(q_set)
     save_q(questions_dict)
-
     pass

@@ -1,3 +1,4 @@
+#code for pdf qna
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -92,20 +93,21 @@ Can you give me 10 quiz questions based on {}, i want it in specific json file f
 [
     {{
         "question": "(Question)",
-        "options": (["option1", "option2", "option3", "option4"]),
-        "answer": "(answer here)"
+        "options": (["A.option1", "B.option2", "C.option3", "D.option4"]),
+        "answer": "whole correct option"
     }},
     {{
         "question": "What is 2 + 2?",
-        "options": ["3", "4", "5", "6"],
-        "answer": "B"
+        "options": ["A.3", "B.4", "C.5", "D.6"],
+        "answer": "whole correct option"
     }},
     {{
         "question": "What is the largest planet in our solar system?",
-        "options": ["Earth", "Venus", "Jupiter", "Mars"],
-        "answer": "C"
+        "options": ["A.Earth", "B.Venus", "C.Jupiter", "D.Mars"],
+        "answer": "whole correct option"
     }}
 ]
+Also each option should have alphabetical labeling as done in example.
 '''.format(context)
     return poompt
 
