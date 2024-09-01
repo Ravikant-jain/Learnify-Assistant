@@ -12,7 +12,7 @@ Functionality: The tool extracts audio from the video, converts it to text, and 
 
 Benefits: Enables students to clarify doubts instantly, enhancing understanding and engagement during lectures.
 
-3. **PDF Q&A**
+2. **PDF Q&A**
 
 Description: Users can upload multiple PDFs, such as notes or textbooks, and ask questions or doubts related to the content.
 
@@ -20,7 +20,7 @@ Functionality: The tool trains a Language Model on the uploaded PDFs, allowing s
 
 Benefits: Provides a convenient way for students to seek clarification on course materials outside of traditional classroom settings.
 
-4. **Quiz**
+3. **Quiz**
 
 Description: Users can upload multiple PDFs and generate quizzes based on specific topics chosen by them.
 
